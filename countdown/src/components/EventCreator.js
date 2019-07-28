@@ -27,18 +27,28 @@ export default class EventCreator extends Component {
             year: year,
             month: month,
             day: day
-        }
-            // , () => {
-            //     axios.post('http://localhost:3001/add-event', [this.state])
-            //     .then(res => console.log('Data send'));
-            // }
-        );
+        });
+    }
+
+    bgChange = e => {
+        this.setState({ background: e.target.value });
     }
 
     onSubmit = e => {
         e.preventDefault();
-        axios.post('http://localhost:3001/add-event', [this.state])
-            .then(res => console.log('Data send', res.data[0].title));
+
+        const event = {
+            title: this.state.title,
+            year: this.state.year,
+            month: this.state.month,
+            day: this.state.day,
+            background: this.state.background
+        };
+        
+        axios.post('http://localhost:3001/add-an-event', event)
+            .then(response => console.log(response.data))
+            .catch(e => console.log(e))
+            this.setState({ title: '' });
     }
 
     render() {
@@ -50,10 +60,11 @@ export default class EventCreator extends Component {
                         <label htmlFor="title">Event Name: </label>
                         <input type="text" value={this.state.title} name="Title" onChange={this.titleChange} placeholder="Your mommas birthday" />
                         <br></br>
-                        <br></br>
                         <label htmlFor="date">Day of Event:</label>
                         <input id="date" name="Date" onChange={this.dateChange} type="date" />
                         <br></br>
+                        <label htmlFor="background">Background URL:</label>
+                        <input id="background" name="Background" onChange={this.bgChange} type="text" />
                         <br></br>
                         <button type="submit">Add it!</button>
                     </form>

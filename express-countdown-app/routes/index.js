@@ -1,19 +1,46 @@
 var express = require('express');
 var router = express.Router();
+var axios = require('axios');
+var models = require('../models');
 var staticModels = require('../staticModels/events');
 
+//////////// Get Events /////////////////
+
 router.get('/events', function (req, res, next) {
-  res.send(JSON.stringify(staticModels.events));
+  models.events.findAll({
+    where: {
+      Deleted: null
+    }
+  })
+  .then(eventsFound => {
+    res.send(eventsFound)
+  })
+  // res.send(JSON.stringify(staticModels.events));
 });
 
-router.post('/add-event', function (req, res, next) {
-  staticModels.events.push({
-    title: req.body.title,
-    day: req.body.day,
-    month: req.body.month,
-    year: req.body.year,
-    background: req.body.background
-  });
+//////////// Create Event //////////////
+
+router.post('/add-an-event', function (req, res, next) {
+  models.events.findOrCreate({
+    where: {
+      Title: req.body.title
+    },
+    defaults: {
+      Year: req.body.year,
+      Month: req.body.month,
+      Day: req.body.day,
+      Background: req.body.background
+    }
+  })
+    .spread(function (result, created) {
+      if (created) {
+        res.send('wow');
+      } else {
+        res.send('close, but.....');
+      }
+    });
 });
+
+
 
 module.exports = router;

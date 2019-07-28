@@ -30,12 +30,12 @@ export default class CountdownContainer extends Component {
                 <div className="countdownContainerGrid">
                     {this.state.events.map(event =>
                         <Countdown
-                            key={event.id}
-                            title={event.title}
-                            month={event.month}
-                            day={event.day}
-                            year={event.year}
-                            image={event.background}
+                            key={event.Id}
+                            title={event.Title}
+                            month={event.Month}
+                            day={event.Day}
+                            year={event.Year}
+                            image={event.Background}
                         />
                     )}
                 </div>
