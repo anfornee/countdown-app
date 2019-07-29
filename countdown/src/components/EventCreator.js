@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 
 import closeIcon from '../assets/images/close-cross-in-circular-outlined-interface-button-2.png';
 
-export default class EventCreator extends Component {
+class EventCreator extends Component {
     state = {
         title: '',
         year: 0,
@@ -44,11 +45,14 @@ export default class EventCreator extends Component {
             day: this.state.day,
             background: this.state.background
         };
-        
+
         axios.post('http://localhost:3001/add-an-event', event)
             .then(response => console.log(response.data))
             .catch(e => console.log(e))
-            this.setState({ title: '' });
+        this.setState({ title: '' });
+        this.props.dispatch({
+            type: 'YES'
+        });
     }
 
     render() {
@@ -73,3 +77,11 @@ export default class EventCreator extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        newEvent: state.newEvent
+    };
+}
+
+export default connect(mapStateToProps)(EventCreator);

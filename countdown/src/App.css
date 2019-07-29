@@ -10,6 +10,19 @@ font-family: 'Oxygen', sans-serif; */
   display: grid;
   width: 100vw;
   grid-template-columns: repeat(3, 33.33%);
+  justify-items: center;
+}
+
+.countdownContainerGrid2 {
+  display: grid;
+  width: 100vw;
+  grid-template-columns: repeat(2, 50%);
+  justify-items: center;
+}
+.countdownContainerGrid1 {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
 }
 
 .addEventBtn {
@@ -24,7 +37,6 @@ font-family: 'Oxygen', sans-serif; */
 }
 
 .eventContainer {
-  margin: auto;
   width: 500px;
   height: 250px;
   margin-bottom: 2em;
@@ -33,7 +45,6 @@ font-family: 'Oxygen', sans-serif; */
 .textContainer {
   bottom: 250px;
   position: relative;
-  margin: auto;
   background: #43cea2;
   background: -webkit-linear-gradient(to right, #185a9d, #43cea2);
   background: linear-gradient(to right, #185a9d, #43cea2);
@@ -57,7 +68,6 @@ font-family: 'Oxygen', sans-serif; */
 
 .imgContainer {
   position: relative;
-  margin: auto;
   width: 500px;
   height: 250px;
 }
